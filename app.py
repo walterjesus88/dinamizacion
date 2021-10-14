@@ -141,9 +141,9 @@ def semanal_deportes(x,browser):
 def vod():
     pass
 
-def franjas():
+def franja():
     pass
-    
+
 def live():
     browser = _login()
     print(browser)
