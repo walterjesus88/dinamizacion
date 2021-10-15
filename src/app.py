@@ -1,6 +1,5 @@
 # save this as app.py
 from flask import Flask, request, render_template
-from TikTokApi import TikTokApi
 import pandas as pd
 from selenium import webdriver
 import time
