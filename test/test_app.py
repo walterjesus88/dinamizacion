@@ -1,5 +1,5 @@
-from app import test
+from app import inc
 
 
 def test_index():
-    assert test() == "Live"
+    assert inc(3) == 4
