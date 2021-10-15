@@ -174,6 +174,10 @@ def live():
     df.to_excel("resultados_partidos1.xlsx",index=False)
     df2.to_excel("resultados_partidos2.xlsx",index=False)
 
+
+def inc(x):
+    return x + 1
+
 @app.route('/')
 def index():
     return render_template(
