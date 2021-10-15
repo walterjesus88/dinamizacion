@@ -4,4 +4,3 @@ gunicorn
 pandas
 selenium
 datetime
-time
