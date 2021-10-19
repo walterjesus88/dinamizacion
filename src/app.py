@@ -13,7 +13,7 @@ import time
 import datetime
 from datetime import datetime, timedelta
 
-app = Flask(__name__)
+app = Flask(__name__,template_folder='../template')
 
 def _login():
     options = webdriver.ChromeOptions()
@@ -224,4 +224,4 @@ def export_records():
     return 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
