@@ -180,9 +180,10 @@ def inc(x):
 
 @app.route('/')
 def index():
-    return render_template(
-        'index.html',
-        data=[{'name':'VOD'}, {'name':'LIVE'}, {'name':'FRANJA'}])
+    return "hello "
+    # render_template(
+    #     'index.html',
+    #     data=[{'name':'VOD'}, {'name':'LIVE'}, {'name':'FRANJA'}])
 
 @app.route("/test" , methods=['GET', 'POST'])
 def test():
