@@ -55,4 +55,4 @@ jobs:
         HEROKU_EMAIL: ${{ secrets.HEROKU_EMAIL }}
     - name: Push to Heroku
       run: |
-        git push heroku HEAD:main -f
+        git push heroku main
