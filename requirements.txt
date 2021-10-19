@@ -4,3 +4,4 @@ gunicorn
 pandas
 selenium
 datetime
+Jinja2==2.10.3
