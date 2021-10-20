@@ -25,7 +25,7 @@ def _login():
     #options.add_argument('--ignore-certificate-errors')
     #options.add_argument('--incognito')
     #browser = webdriver.Chrome(executable_path="./chromedriver")
-    browser = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER PATH"),Chrome_options=options)
+    browser = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER PATH"),chrome_options=options)
     browser.get("https://youbora.nicepeopleatwork.com/")
     #_login(driver, 'PeruOps', 'P3ru0ps')
 
