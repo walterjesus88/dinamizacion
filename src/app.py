@@ -12,16 +12,20 @@ from selenium.webdriver.common.action_chains import ActionChains
 import time
 import datetime
 from datetime import datetime, timedelta
+import os
 
 app = Flask(__name__,template_folder='../template')
 
 def _login():
     options = webdriver.ChromeOptions()
-    options.add_argument('--ignore-certificate-errors')
-    options.add_argument('--incognito')
+    options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
     options.add_argument('--headless')
-    #sdriver = webdriver.Chrome("./chromedriver", options=options)
-    browser = webdriver.Chrome(executable_path="./chromedriver")
+    options.add_argument('--disable-dev-shm-usage')
+    options.add_argument('--no-sandbox')
+    #options.add_argument('--ignore-certificate-errors')
+    #options.add_argument('--incognito')
+    #browser = webdriver.Chrome(executable_path="./chromedriver")
+    browser = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER PATH"),Chrome_options=options)
     browser.get("https://youbora.nicepeopleatwork.com/")
     #_login(driver, 'PeruOps', 'P3ru0ps')
 
