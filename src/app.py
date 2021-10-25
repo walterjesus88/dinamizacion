@@ -13,6 +13,7 @@ from selenium.webdriver.common.action_chains import ActionChains
 import datetime
 from datetime import datetime, timedelta
 import os
+from flask import send_file
 
 app = Flask(__name__,template_folder='../template')
 
@@ -43,7 +44,7 @@ def _login(browser, email, password):
     browser.execute_script("arguments[0].click();", WebDriverWait(browser, 20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="youbora__container"]/main/div[1]/button'))))
     browser.execute_script("arguments[0].click();", WebDriverWait(browser, 20).until(EC.element_to_be_clickable((By.XPATH, '/html/body/div[2]/div[3]/div/div[3]/button[2]'))))
 
-    live(browser)
+    return browser
 
 #def my_form():
 #    return render_template('form.html')
@@ -183,7 +184,9 @@ def live(browser):
     df.to_excel("resultados_partidos1.xlsx",index=False)
     df2.to_excel("resultados_partidos2.xlsx",index=False)
 
-    #return 1
+    path = "../resultados_partidos1.xlsx"
+    return send_file(path, as_attachment=True)
+    #return df2,df
 
 
 def inc(x):
@@ -216,15 +219,17 @@ def test():
 
 
     driver.get("https://youbora.nicepeopleatwork.com/")
-    _login(driver, 'PeruOps', 'P3ru0ps')
+    browser = _login(driver, 'PeruOps', 'P3ru0ps')
 
-    # if select == 'LIVE':
-    #     live()
-    # elif select == 'FRANJA':
-    #     franja()
-    # else:
-    #     vod()
-    return(str(select)) # just to see what select is
+    if select == 'LIVE':
+        file = live(browser)
+       
+    elif select == 'FRANJA':
+        franja()
+    else:
+        vod()
+    #return(str(select))
+    return file
 
 @app.route('/', methods=['POST'])
 def my_form_post():
@@ -252,6 +257,13 @@ def upload_file():
 @app.route("/export", methods=['GET'])
 def export_records():
     return 
+
+
+@app.route('/download')
+def downloadFile ():
+    #For windows you need to use drive name [ex: F:/Example.pdf]
+    path = "../resultados_partidos1.xlsx"
+    return send_file(path, as_attachment=True)
 
 if __name__ == "__main__":
     app.run(debug=True)
