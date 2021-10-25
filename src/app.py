@@ -143,7 +143,7 @@ def live():
     options.add_argument('--no-sandbox')
     browser = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"),chrome_options=options)
     browser.get("https://youbora.nicepeopleatwork.com/")
-    print(browser.page_source)
+    #print(browser.page_source)
     #browser = _login(driver, 'PeruOps', 'P3ru0ps')
 
     browser.get("https://suite.npaw.com/login")
