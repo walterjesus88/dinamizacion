@@ -1,6 +1,9 @@
 from selenium import webdriver
 import os
 
+def inc(x):
+    return x + 1
+
 options = webdriver.ChromeOptions()
 options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
 
@@ -13,5 +16,3 @@ driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"),ch
 driver.get("https://youtube.com")
 print(driver.page_source)
 
-def inc(x):
-    return x + 1
