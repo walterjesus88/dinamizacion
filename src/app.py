@@ -1,5 +1,8 @@
 from selenium import webdriver
 import os
+from flask import Flask, request, render_template
+
+app = Flask(__name__,template_folder='../template')
 
 def inc(x):
     return x + 1
