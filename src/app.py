@@ -12,3 +12,6 @@ driver = webdriver.Chrome(executable_path=str(os.environ.get("CHROMEDRIVER_PATH"
 
 driver.get("https://youtube.com")
 print(driver.page_source)
+
+def inc(x):
+    return x + 1
