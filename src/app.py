@@ -26,7 +26,7 @@ def _login():
 
     options.add_argument('--ignore-certificate-errors')
     options.add_argument('--incognito')
-    options.add_argument('--headless')
+
 
 
     #browser = webdriver.Chrome(executable_path="./chromedriver")
