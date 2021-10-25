@@ -39,8 +39,11 @@ def _login():
     time.sleep(5)
     browser.get("https://youbora.nicepeopleatwork.com/analytics/MainKPIsPeru/Phantasia-DINA")
   
+    time.sleep(5)
 
     browser.find_element(By.XPATH,'//*[@id="youbora__container"]/main/div[1]/button').click()
+    time.sleep(5)
+    
     browser.find_element(By.XPATH,'/html/body/div[2]/div[3]/div/div[3]/button[2]').click()
 
 
