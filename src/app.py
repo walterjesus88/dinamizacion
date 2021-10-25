@@ -136,13 +136,17 @@ def franja():
 
 def live():
     options = webdriver.ChromeOptions()
-    options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-
+    options.add_argument('--ignore-certificate-errors')
+    options.add_argument('--incognito')
     options.add_argument('--headless')
-    options.add_argument('--disable-dev-shm-usage')
-    options.add_argument('--no-sandbox')
-    browser = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"),chrome_options=options)
-    browser.get("https://youbora.nicepeopleatwork.com/")
+    browser = webdriver.Chrome(executable_path="./chromedriver")
+    # options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+
+    # options.add_argument('--headless')
+    # options.add_argument('--disable-dev-shm-usage')
+    # options.add_argument('--no-sandbox')
+    # browser = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"),chrome_options=options)
+    #browser.get("https://youbora.nicepeopleatwork.com/")
     #print(browser.page_source)
     #browser = _login(driver, 'PeruOps', 'P3ru0ps')
 
