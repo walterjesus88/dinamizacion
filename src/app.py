@@ -219,6 +219,7 @@ def test():
 
 
     driver.get("https://youbora.nicepeopleatwork.com/")
+    print(driver.page_source)
     browser = _login(driver, 'PeruOps', 'P3ru0ps')
 
     if select == 'LIVE':
