@@ -42,12 +42,12 @@ def _login():
     browser.execute_script("arguments[0].click();", WebDriverWait(browser, 20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="youbora__login_submit"]'))))
 
     time.sleep(5)
-    driver = browser.get("https://suite.npaw.com/analytics/MainKPIsPeru/Phantasia-DINA")
+    browser.get("https://suite.npaw.com/analytics/MainKPIsPeru/Phantasia-DINA")
 
     time.sleep(5)
 
-    deletefilter = driver.find_element_by_xpath('/html/body/div/main')
-    deletefilter.click()
+    s = browser.find_element_by_xpath('/html/body/div/main')
+    #browser.click()
     time.sleep(5)
 
     driver.find_element_by_xpath('/html/body/div[2]/div[3]/div/div[3]/button[2]').click()
