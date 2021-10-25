@@ -204,17 +204,17 @@ def test():
 
     select = request.form.get('comp_select')
     options = webdriver.ChromeOptions()
-    # #options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-    options.add_argument('--ignore-certificate-errors')
-    options.add_argument('--incognito')
+    options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+    #options.add_argument('--ignore-certificate-errors')
+    #options.add_argument('--incognito')
     options.add_argument('--headless')
 
-    driver = webdriver.Chrome(executable_path="./chromedriver")
+    #driver = webdriver.Chrome(executable_path="./chromedriver")
 
  
-    # #options.add_argument('--disable-dev-shm-usage')
-    # #options.add_argument('--no-sandbox')
-    # #browser = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"),chrome_options=options)
+    options.add_argument('--disable-dev-shm-usage')
+    options.add_argument('--no-sandbox')
+    browser = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"),chrome_options=options)
 
 
 
