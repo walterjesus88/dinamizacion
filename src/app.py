@@ -146,7 +146,7 @@ def live():
     print(driver.page_source)
     #browser = _login(driver, 'PeruOps', 'P3ru0ps')
 
-    browser.get("https://suite.npaw.com/login")
+    browser = browser.get("https://suite.npaw.com/login")
     #browser.maximize_window()
     time.sleep(1)
   
