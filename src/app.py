@@ -267,3 +267,4 @@ def downloadFile ():
 
 if __name__ == "__main__":
     app.run(debug=True)
+    #web gunicorn --pythonpath src app:app
