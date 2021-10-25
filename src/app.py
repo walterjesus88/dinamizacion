@@ -46,7 +46,7 @@ def _login():
 
     time.sleep(5)
 
-    s = browser.find_element_by_xpath('/html/body/div/main')
+    s = browser.find_element_by_xpath('/html/body/div/main/div[1]/button')
     #browser.click()
     time.sleep(5)
 
