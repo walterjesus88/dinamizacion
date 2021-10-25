@@ -19,6 +19,8 @@ app = Flask(__name__,template_folder='../template')
 
 def _login(browser, email, password):
 
+
+
     browser.get("https://suite.npaw.com/login")
     browser.maximize_window()
     time.sleep(5)
@@ -29,10 +31,15 @@ def _login(browser, email, password):
     print(browser)
 
     browser.execute_script("arguments[0].click();", WebDriverWait(browser, 20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="youbora__login_submit"]'))))
+
+
     time.sleep(5)
     browser.get("https://youbora.nicepeopleatwork.com/analytics/MainKPIsPeru/Phantasia-DINA")
+
+
     browser.execute_script("arguments[0].click();", WebDriverWait(browser, 20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="youbora__container"]/main/div[1]/button'))))
     browser.execute_script("arguments[0].click();", WebDriverWait(browser, 20).until(EC.element_to_be_clickable((By.XPATH, '/html/body/div[2]/div[3]/div/div[3]/button[2]'))))
+
     return browser
 
 #def my_form():
@@ -134,78 +141,49 @@ def vod():
 def franja():
     pass
 
-def live():
-    options = webdriver.ChromeOptions()
-    options.add_argument('--ignore-certificate-errors')
-    options.add_argument('--incognito')
-    options.add_argument('--headless')
-    browser = webdriver.Chrome(executable_path="./chromedriver")
-    # options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+def live(browser):
+    deportes =  pd.read_csv('DEPORTES.csv')
+    deportes = deportes[['canal','fecha']]
+    print(deportes)
+    total_sus = []
+    total_hou = []
+    KPI = []
+    KPI_antes = []
+    time.sleep(2)
 
-    # options.add_argument('--headless')
-    # options.add_argument('--disable-dev-shm-usage')
-    # options.add_argument('--no-sandbox')
-    # browser = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"),chrome_options=options)
-    #browser.get("https://youbora.nicepeopleatwork.com/")
-    #print(browser.page_source)
-    #browser = _login(driver, 'PeruOps', 'P3ru0ps')
-
-    browser.get("https://suite.npaw.com/login")
-    #browser.maximize_window()
-    #time.sleep(5)
-  
-    u = browser.find_element_by_xpath('//*[@id="youbora__container"]/div[1]/form/div[1]/div/input').send_keys("PeruOps")
-    p=  browser.find_element_by_xpath('//*[@id="youbora__container"]/div[1]/form/div[2]/div/input').send_keys("P3ru0ps")
-
-    #print(browser)
-
-    browser.execute_script("arguments[0].click();", WebDriverWait(browser, 20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="youbora__login_submit"]'))))
-    #time.sleep(5)
-    browser.get("https://youbora.nicepeopleatwork.com/analytics/MainKPIsPeru/Phantasia-DINA")
-    browser.execute_script("arguments[0].click();", WebDriverWait(browser, 20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="youbora__container"]/main/div[1]/button'))))
-    browser.execute_script("arguments[0].click();", WebDriverWait(browser, 20).until(EC.element_to_be_clickable((By.XPATH, '/html/body/div[2]/div[3]/div/div[3]/button[2]'))))
-   
-
-    # deportes =  pd.read_csv('DEPORTES.csv')
-    # deportes = deportes[['canal','fecha']]
-    # print(deportes)
-    # total_sus = []
-    # total_hou = []
-    # KPI = []
-    # KPI_antes = []
-    # time.sleep(2)
-
-    # for index,row in deportes.iterrows():
-    #     print(row['canal'])
-    #     print(row['fecha'])
-    #     x ={'canal':row['canal'],'fecha':row['fecha']}
+    for index,row in deportes.iterrows():
+        print(row['canal'])
+        print(row['fecha'])
+        x ={'canal':row['canal'],'fecha':row['fecha']}
 
     
-    #     week_after = datetime.strptime(x['fecha'], '%Y-%m-%d %H:%M:%S') -  timedelta(days=7)
+        week_after = datetime.strptime(x['fecha'], '%Y-%m-%d %H:%M:%S') -  timedelta(days=7)
       
 
-    #     x_before = {'canal': x['canal'],'fecha':str(week_after)}
+        x_before = {'canal': x['canal'],'fecha':str(week_after)}
 
-    #     total=semanal_deportes(x,browser)
-    #     total_before=semanal_deportes(x_before,browser)
-    #     KPI.append(total)
-    #     KPI_antes.append(total_before)
+        total=semanal_deportes(x,browser)
+        total_before=semanal_deportes(x_before,browser)
+        KPI.append(total)
+        KPI_antes.append(total_before)
 
-    # print(KPI)
-    # df = pd.DataFrame(data=KPI)
-    # print(df)
-    # df['suscribers']=df['suscribers'].apply(convertir_suscribers)
-    # df['hours']=df['hours'].apply(convertir_hours)
-    # df2 = pd.DataFrame(data=KPI_antes)
-    # print(df2)
-    # df2['suscribers']=df2['suscribers'].apply(convertir_suscribers)
-    # df2['hours']=df2['hours'].apply(convertir_hours)
+    print(KPI)
+    df = pd.DataFrame(data=KPI)
+    print(df)
+    df['suscribers']=df['suscribers'].apply(convertir_suscribers)
+    df['hours']=df['hours'].apply(convertir_hours)
+    df2 = pd.DataFrame(data=KPI_antes)
+    print(df2)
+    df2['suscribers']=df2['suscribers'].apply(convertir_suscribers)
+    df2['hours']=df2['hours'].apply(convertir_hours)
 
-    # df.to_excel("resultados_partidos1.xlsx",index=False)
-    # df2.to_excel("resultados_partidos2.xlsx",index=False)
+    df.to_excel("resultados_partidos1.xlsx",index=False)
+    df2.to_excel("resultados_partidos2.xlsx",index=False)
 
-    # path = "../resultados_partidos1.xlsx"
-    # return send_file(path, as_attachment=True)
+    path = "../resultados_partidos1.xlsx"
+    return send_file(path, as_attachment=True)
+    #return df2,df
+
 
 def inc(x):
     return x + 1
@@ -213,27 +191,32 @@ def inc(x):
 @app.route('/')
 def index():
     #"hello "
-    live()
-
-    # return render_template(
-    #     'index.html',
-    #     data=[{'name':'VOD'}, {'name':'LIVE'}, {'name':'FRANJA'}])
+    return render_template(
+        'index.html',
+        data=[{'name':'VOD'}, {'name':'LIVE'}, {'name':'FRANJA'}])
 
 @app.route("/test" , methods=['GET', 'POST'])
 def test():
 
     select = request.form.get('comp_select')
-    #options = webdriver.ChromeOptions()
-
-    #options.add_argument('--ignore-certificate-errors')
-    #options.add_argument('--incognito')
-    #options.add_argument('--headless')
+    options = webdriver.ChromeOptions()
+    options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+    options.add_argument('--headless') 
+    options.add_argument('--ignore-certificate-errors')
+    options.add_argument('--incognito')
+    #options.add_argument('--no-sandbox')
+    #options.add_argument('--disable-dev-shm-usage')
+    driver = webdriver.Chrome(executable_path=str(os.environ.get("CHROMEDRIVER_PATH")),chrome_options=options)
     #driver = webdriver.Chrome(executable_path="./chromedriver")
 
 
 
+    driver.get("https://youbora.nicepeopleatwork.com/")
+   
+    browser = _login(driver, 'PeruOps', 'P3ru0ps')
+
     if select == 'LIVE':
-        file = live()
+        file = live(browser)
        
     elif select == 'FRANJA':
         franja()
