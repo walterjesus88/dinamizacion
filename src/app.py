@@ -42,15 +42,15 @@ def _login():
     browser.execute_script("arguments[0].click();", WebDriverWait(browser, 20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="youbora__login_submit"]'))))
 
     time.sleep(5)
-    browser.get("https://youbora.nicepeopleatwork.com/analytics/MainKPIsPeru/Phantasia-DINA")
+    driver = browser.get("https://youbora.nicepeopleatwork.com/analytics/MainKPIsPeru/Phantasia-DINA")
   
     time.sleep(5)
 
-    deletefilter = browser.find_element(By.XPATH,'/html/body/div/main/div[1]/button')
+    deletefilter = driver.find_element(By.XPATH,'/html/body/div/main/div[1]/button')
     deletefilter.click()
     time.sleep(5)
 
-    browser.find_element(By.XPATH,'/html/body/div[2]/div[3]/div/div[3]/button[2]').click()
+    driver.find_element(By.XPATH,'/html/body/div[2]/div[3]/div/div[3]/button[2]').click()
 
 
     return browser
