@@ -46,7 +46,7 @@ def _login():
 
     time.sleep(5)
 
-    deletefilter = driver.find_element_by_xpath('/html/body/div/main/div[1]/button')
+    deletefilter = driver.find_element_by_xpath('/html/body/div/main')
     deletefilter.click()
     time.sleep(5)
 
