@@ -50,7 +50,7 @@ def _login():
     #browser.click()
     time.sleep(5)
 
-    driver.find_element_by_xpath('/html/body/div[2]/div[3]/div/div[3]/button[2]').click()
+    browser.find_element_by_xpath('/html/body/div[2]/div[3]/div/div[3]/button[2]').click()
 
 
     return browser
