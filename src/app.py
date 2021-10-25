@@ -141,15 +141,14 @@ def live():
     options.add_argument('--headless')
     options.add_argument('--disable-dev-shm-usage')
     options.add_argument('--no-sandbox')
-    driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"),chrome_options=options)
-    driver.get("https://youbora.nicepeopleatwork.com/")
-    print(driver.page_source)
-    #driver = _login(driver, 'PeruOps', 'P3ru0ps')
+    browser = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"),chrome_options=options)
+    browser.get("https://youbora.nicepeopleatwork.com/")
+    print(browser.page_source)
+    #browser = _login(driver, 'PeruOps', 'P3ru0ps')
 
-    driver.get("https://suite.npaw.com/login")
+    browser.get("https://suite.npaw.com/login")
     #browser.maximize_window()
-    time.sleep(1)
-    browser = driver
+    time.sleep(5)
   
     u = browser.find_element_by_xpath('//*[@id="youbora__container"]/div[1]/form/div[1]/div/input').send_keys("PeruOps")
     p=  browser.find_element_by_xpath('//*[@id="youbora__container"]/div[1]/form/div[2]/div/input').send_keys("P3ru0ps")
@@ -157,14 +156,11 @@ def live():
     print(browser)
 
     browser.execute_script("arguments[0].click();", WebDriverWait(browser, 20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="youbora__login_submit"]'))))
-    time.sleep(1)
-    browser=browser.get("https://youbora.nicepeopleatwork.com/analytics/MainKPIsPeru/Phantasia-DINA")
-    time.sleep(1)
+    time.sleep(5)
+    browser.get("https://youbora.nicepeopleatwork.com/analytics/MainKPIsPeru/Phantasia-DINA")
     browser.execute_script("arguments[0].click();", WebDriverWait(browser, 20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="youbora__container"]/main/div[1]/button'))))
-    time.sleep(1)
     browser.execute_script("arguments[0].click();", WebDriverWait(browser, 20).until(EC.element_to_be_clickable((By.XPATH, '/html/body/div[2]/div[3]/div/div[3]/button[2]'))))
    
-
 
     deportes =  pd.read_csv('DEPORTES.csv')
     deportes = deportes[['canal','fecha']]
