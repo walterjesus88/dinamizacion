@@ -212,9 +212,9 @@ def test():
     #driver = webdriver.Chrome(executable_path="./chromedriver")
 
  
-    options.add_argument('--disable-dev-shm-usage')
     options.add_argument('--no-sandbox')
-    driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"),chrome_options=options)
+    options.add_argument('--disable-dev-shm-usage')
+    driver = webdriver.Chrome(executable_path=str(os.environ.get("CHROMEDRIVER_PATH")),chrome_options=options)
 
 
 
