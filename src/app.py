@@ -46,7 +46,8 @@ def _login():
   
     time.sleep(5)
 
-    browser.find_element(By.XPATH,'/html/body/div/main/div[1]/button').click()
+    deletefilter = browser.find_element(By.XPATH,'/html/body/div/main/div[1]/button')
+    deletefilter.click()
     time.sleep(5)
 
     browser.find_element(By.XPATH,'/html/body/div[2]/div[3]/div/div[3]/button[2]').click()
