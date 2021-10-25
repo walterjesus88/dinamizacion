@@ -144,9 +144,9 @@ def live():
     driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"),chrome_options=options)
     driver.get("https://youbora.nicepeopleatwork.com/")
     print(driver.page_source)
-    #browser = _login(driver, 'PeruOps', 'P3ru0ps')
+    #driver = _login(driver, 'PeruOps', 'P3ru0ps')
 
-    browser = browser.get("https://suite.npaw.com/login")
+    browser = driver.get("https://suite.npaw.com/login")
     #browser.maximize_window()
     time.sleep(1)
   
@@ -157,7 +157,7 @@ def live():
 
     browser.execute_script("arguments[0].click();", WebDriverWait(browser, 20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="youbora__login_submit"]'))))
     time.sleep(1)
-    browser.get("https://youbora.nicepeopleatwork.com/analytics/MainKPIsPeru/Phantasia-DINA")
+    browser =  browser.get("https://youbora.nicepeopleatwork.com/analytics/MainKPIsPeru/Phantasia-DINA")
     browser.execute_script("arguments[0].click();", WebDriverWait(browser, 20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="youbora__container"]/main/div[1]/button'))))
     browser.execute_script("arguments[0].click();", WebDriverWait(browser, 20).until(EC.element_to_be_clickable((By.XPATH, '/html/body/div[2]/div[3]/div/div[3]/button[2]'))))
    
