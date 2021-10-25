@@ -19,7 +19,7 @@ app = Flask(__name__,template_folder='../template')
 def _login():
     options = webdriver.ChromeOptions()
     options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-    options.add_argument('--headless')
+    #options.add_argument('--headless')
     options.add_argument('--disable-dev-shm-usage')
     options.add_argument('--no-sandbox')
 
@@ -46,7 +46,7 @@ def _login():
   
     time.sleep(5)
 
-    browser.find_element(By.XPATH,'//*[@id="youbora__container"]/main/div[1]/button').click()
+    browser.find_element(By.XPATH,'/html/body/div/main/div[1]/button').click()
     time.sleep(5)
 
     browser.find_element(By.XPATH,'/html/body/div[2]/div[3]/div/div[3]/button[2]').click()
