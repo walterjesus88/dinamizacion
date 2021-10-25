@@ -19,7 +19,7 @@ app = Flask(__name__,template_folder='../template')
 def _login():
     options = webdriver.ChromeOptions()
     options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-    options.add_argument('--headless')
+    #options.add_argument('--headless')
     #options.add_argument('--disable-dev-shm-usage')
     #options.add_argument('--no-sandbox')
 
@@ -42,15 +42,15 @@ def _login():
     browser.execute_script("arguments[0].click();", WebDriverWait(browser, 20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="youbora__login_submit"]'))))
 
     time.sleep(5)
-    driver = browser.get("https://youbora.nicepeopleatwork.com/analytics/MainKPIsPeru/Phantasia-DINA")
-  
+    driver = browser.get("https://suite.npaw.com/analytics/MainKPIsPeru/Phantasia-DINA")
+
     time.sleep(5)
 
-    deletefilter = driver.find_element(By.XPATH,'/html/body/div/main/div[1]/button')
+    deletefilter = driver.find_element_by_xpath('/html/body/div/main/div[1]/button')
     deletefilter.click()
     time.sleep(5)
 
-    driver.find_element(By.XPATH,'/html/body/div[2]/div[3]/div/div[3]/button[2]').click()
+    driver.find_element_by_xpath('/html/body/div[2]/div[3]/div/div[3]/button[2]').click()
 
 
     return browser
