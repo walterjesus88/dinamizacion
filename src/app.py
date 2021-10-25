@@ -162,46 +162,46 @@ def live():
     browser.execute_script("arguments[0].click();", WebDriverWait(browser, 20).until(EC.element_to_be_clickable((By.XPATH, '/html/body/div[2]/div[3]/div/div[3]/button[2]'))))
    
 
-    deportes =  pd.read_csv('DEPORTES.csv')
-    deportes = deportes[['canal','fecha']]
-    print(deportes)
-    total_sus = []
-    total_hou = []
-    KPI = []
-    KPI_antes = []
-    time.sleep(2)
+    # deportes =  pd.read_csv('DEPORTES.csv')
+    # deportes = deportes[['canal','fecha']]
+    # print(deportes)
+    # total_sus = []
+    # total_hou = []
+    # KPI = []
+    # KPI_antes = []
+    # time.sleep(2)
 
-    for index,row in deportes.iterrows():
-        print(row['canal'])
-        print(row['fecha'])
-        x ={'canal':row['canal'],'fecha':row['fecha']}
+    # for index,row in deportes.iterrows():
+    #     print(row['canal'])
+    #     print(row['fecha'])
+    #     x ={'canal':row['canal'],'fecha':row['fecha']}
 
     
-        week_after = datetime.strptime(x['fecha'], '%Y-%m-%d %H:%M:%S') -  timedelta(days=7)
+    #     week_after = datetime.strptime(x['fecha'], '%Y-%m-%d %H:%M:%S') -  timedelta(days=7)
       
 
-        x_before = {'canal': x['canal'],'fecha':str(week_after)}
+    #     x_before = {'canal': x['canal'],'fecha':str(week_after)}
 
-        total=semanal_deportes(x,browser)
-        total_before=semanal_deportes(x_before,browser)
-        KPI.append(total)
-        KPI_antes.append(total_before)
+    #     total=semanal_deportes(x,browser)
+    #     total_before=semanal_deportes(x_before,browser)
+    #     KPI.append(total)
+    #     KPI_antes.append(total_before)
 
-    print(KPI)
-    df = pd.DataFrame(data=KPI)
-    print(df)
-    df['suscribers']=df['suscribers'].apply(convertir_suscribers)
-    df['hours']=df['hours'].apply(convertir_hours)
-    df2 = pd.DataFrame(data=KPI_antes)
-    print(df2)
-    df2['suscribers']=df2['suscribers'].apply(convertir_suscribers)
-    df2['hours']=df2['hours'].apply(convertir_hours)
+    # print(KPI)
+    # df = pd.DataFrame(data=KPI)
+    # print(df)
+    # df['suscribers']=df['suscribers'].apply(convertir_suscribers)
+    # df['hours']=df['hours'].apply(convertir_hours)
+    # df2 = pd.DataFrame(data=KPI_antes)
+    # print(df2)
+    # df2['suscribers']=df2['suscribers'].apply(convertir_suscribers)
+    # df2['hours']=df2['hours'].apply(convertir_hours)
 
-    df.to_excel("resultados_partidos1.xlsx",index=False)
-    df2.to_excel("resultados_partidos2.xlsx",index=False)
+    # df.to_excel("resultados_partidos1.xlsx",index=False)
+    # df2.to_excel("resultados_partidos2.xlsx",index=False)
 
-    path = "../resultados_partidos1.xlsx"
-    return send_file(path, as_attachment=True)
+    # path = "../resultados_partidos1.xlsx"
+    # return send_file(path, as_attachment=True)
 
 def inc(x):
     return x + 1
