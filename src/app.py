@@ -32,8 +32,8 @@ def _login():
     browser.get("https://youbora.nicepeopleatwork.com/login")
     browser.maximize_window()
     
-    u = browser.find_element_by_xpath('//*[@id="youbora__container"]/div[1]/form/div[1]/div/div/input').send_keys("PeruOps")
-    p=  browser.find_element_by_xpath('//*[@id="youbora__container"]/div[1]/form/div[2]/div/div/input').send_keys("P3ru0ps")
+    u = browser.find_element_by_xpath('//*[@id="youbora__container"]/div[1]/form/div[1]/div/input').send_keys("PeruOps")
+    p=  browser.find_element_by_xpath('//*[@id="youbora__container"]/div[1]/form/div[2]/div/input').send_keys("P3ru0ps")
     browser.execute_script("arguments[0].click();", WebDriverWait(browser, 20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="youbora__login_submit"]'))))
 
     time.sleep(5)
