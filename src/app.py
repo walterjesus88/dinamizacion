@@ -16,151 +16,135 @@ import os
 
 app = Flask(__name__,template_folder='../template')
 
-def _login():
-    options = webdriver.ChromeOptions()
-    options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-    #options.add_argument('--headless')
-    #options.add_argument('--disable-dev-shm-usage')
-    #options.add_argument('--no-sandbox')
-
-
-    options.add_argument('--ignore-certificate-errors')
-    options.add_argument('--incognito')
+def _login(browser, email, password):
 
 
 
-    browser = webdriver.Chrome(executable_path="./chromedriver")
-    #browser = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"),chrome_options=options)
-    browser.get("https://youbora.nicepeopleatwork.com/")
-    #_login(driver, 'PeruOps', 'P3ru0ps')
 
-    browser.get("https://youbora.nicepeopleatwork.com/login")
+
+
+
+    browser.get("https://suite.npaw.com/login")
     browser.maximize_window()
-    
+    time.sleep(5)
+  
     u = browser.find_element_by_xpath('//*[@id="youbora__container"]/div[1]/form/div[1]/div/input').send_keys("PeruOps")
     p=  browser.find_element_by_xpath('//*[@id="youbora__container"]/div[1]/form/div[2]/div/input').send_keys("P3ru0ps")
+
+    print(browser)
+
     browser.execute_script("arguments[0].click();", WebDriverWait(browser, 20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="youbora__login_submit"]'))))
 
-    time.sleep(5)
-    browser.get("https://suite.npaw.com/analytics/MainKPIsPeru/Phantasia-DINA")
 
     time.sleep(5)
-
-    #s = browser.find_element_by_xpath('/html/body/div/main/div[1]/button')
-    #browser.click()
-    #time.sleep(5)
-
-    #browser.find_element_by_xpath('/html/body/div[2]/div[3]/div/div[3]/button[2]').click()
+    browser.get("https://youbora.nicepeopleatwork.com/analytics/MainKPIsPeru/Phantasia-DINA")
 
 
-    return browser
-    #live(browser)
-    #vod(browser)
-    #franja(browser)
+    browser.execute_script("arguments[0].click();", WebDriverWait(browser, 20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="youbora__container"]/main/div[1]/button'))))
+    browser.execute_script("arguments[0].click();", WebDriverWait(browser, 20).until(EC.element_to_be_clickable((By.XPATH, '/html/body/div[2]/div[3]/div/div[3]/button[2]'))))
 
-# @app.route('/')
-# def youbora_init():
+    live(browser)
 
 #def my_form():
 #    return render_template('form.html')
-def semanal_deportes(x,browser):
-    #limpiar filtros por defecto
-    calendar = browser.find_element_by_id('element-calendar').click()
 
+def convertir_suscribers(x):
+
+    x1= str(x).replace(".","")
+    print(x1)
+    return float(x1)
+
+
+def convertir_hours(x):
+    a= str(x).split(" ")
+    aa= str(a[0]).replace("h", "")
+    aa1 = float(aa.replace(".",""))
+
+    if len(a)>1:
+        bb= str(a[1]).replace("m", "")
+        a_hours = float(bb)/60
+    else:
+        a_hours=0
+
+    return aa1+a_hours
+
+def semanal_deportes(x,browser):
+    calendar = browser.find_element_by_id('element-calendar').click()
+   
     CANAL=x['canal']
     FECHA=x['fecha']
     time_ini= datetime.strptime(FECHA, '%Y-%m-%d %H:%M:%S').time()
     time_tuple =  datetime.strptime(FECHA, '%Y-%m-%d %H:%M:%S') +  timedelta(hours=1,minutes=59)
     time_2horas = time_tuple.time()
 
-    #hora_time = time_tuple.strftime("%H:%M:%S")
-    #timestamp = time.mktime(time_tuple)       
     print(time_2horas)
     print(time_ini)
  
     d = datetime.strptime(FECHA, '%Y-%m-%d %H:%M:%S')
     dia  = str(d.strftime('%a %b %d %Y'))
-    #'Tue Jul 13 2021'
+ 
     DIA='//*[@id="date-picker-calendar"]//div[@aria-label="'+dia+'"]'
 
     time.sleep(2) 
     browser.execute_script("arguments[0].click();", WebDriverWait(browser, 20).until(EC.element_to_be_clickable((By.XPATH, DIA)))) #'//*[@id="date-picker-calendar"]//div[@aria-label="Tue Jul 13 2021"]'
     browser.execute_script("arguments[0].click();", WebDriverWait(browser, 20).until(EC.element_to_be_clickable((By.XPATH, DIA))))
-    #WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="date-picker-calendar"]//div[@aria-label="Tue Jul 13 2021"]'))).click()
 
-    #k3 = browser.find_element(By.XPATH,'//*[@id="date-picker-calendar"]//div[@aria-label="Tue Jul 13 2021"]').click()
-    # time.sleep(8) 
-    #today = browser.find_element(By.XPATH,'//*[@id="date-picker-calendar"]/div[3]/div[2]/div/div[2]/div[2]/div[3]/div[5]/div[5]//p[text()="16"').click()
     time.sleep(1) 
     browser.find_element(By.XPATH,'//*[@id="date-picker-calendar"]/div[3]/div[1]/div[2]/div[2]/div/div/div/input').send_keys(Keys.CONTROL,"a")
     browser.find_element(By.XPATH,'//*[@id="date-picker-calendar"]/div[3]/div[1]/div[2]/div[2]/div/div/div/input').send_keys(str(time_ini))
  
     browser.find_element(By.XPATH,'//*[@id="date-picker-calendar"]/div[3]/div[1]/div[3]/div[2]/div/div/div/input').send_keys(Keys.CONTROL,"a")
     browser.find_element(By.XPATH,'//*[@id="date-picker-calendar"]/div[3]/div[1]/div[3]/div[2]/div/div/div/input').send_keys(str(time_2horas))
-    #APPLY CALENDAR
-    browser.find_element(By.XPATH,'//*[@id="date-picker-calendar"]/div[3]/div[3]/button[2]').click()
 
-    #FILTER
-    #browser.find_element(By.XPATH,'//*[@id="youbora__container"]/main/header/div[2]/button[2]').click()
+    browser.find_element(By.XPATH,'//*[@id="date-picker-calendar"]/div[3]/div[3]/button[2]').click()
     browser.execute_script("arguments[0].click();", WebDriverWait(browser, 20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="youbora__container"]/main/header/div[2]/button[2]'))))
     browser.find_element(By.XPATH,'/html/body/div[2]/div[3]/div[3]/div[1]/div[2]/div/div/div/div[1]/p/div/div/input').send_keys('Device')
     browser.find_element(By.XPATH,'/html/body/div[2]/div[3]/div[3]/div[1]/div[2]/div/div/div/div[1]/p/div/div/input').send_keys(Keys.ENTER)
-    #Elejir STB
+  
     time.sleep(3)
-    #xc=browser.find_element(By.XPATH,'/html/body/div[2]/div[3]/div[3]/div[2]/div[2]/div/table/tbody/div/tr[1]/td[1]/div/span/span[1]/input').send_keys("STB").click()
-                                     #'/html/body/div[2]/div[3]/div[3]/div[2]/div[2]/div/table/tbody/div/tr[3]/td[1]/div/span/span[1]/input
     browser.find_element(By.XPATH,'//*[@id="youbora__filters_wizard"]//p[text()="STB"]').click()
-    #.click()
-    #driver.execute_script("arguments[0].click();", WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="youbora__filters_wizard"]/div[3]/div[3]/div[2]/div[2]/div/table/tbody/div/tr[1]/td[1]/div/span/span[1]/input'))))
-    #WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="youbora__filters_wizard"]/div[3]/div[3]/div[2]/div[2]/div/table/tbody/div/tr[1]/td[1]/div/span/span[1]/input'))).click()
-   
+
     time.sleep(3)
     #Exclude   
     browser.find_element(By.XPATH,'/html/body/div[2]/div[3]/div[3]/div[1]/div[1]/div/div/div/div[1]/p/div/div/input').send_keys("Exclude")
     time.sleep(3)
     browser.find_element(By.XPATH,'/html/body/div[2]/div[3]/div[3]/div[1]/div[1]/div/div/div/div[1]/p/div/div/input').send_keys(Keys.ENTER)
-    #APPLY FILTER
-    #browser.find_element(By.XPATH,'//*[@id="youbora__filters_wizard"]/div[3]/div[3]/button').click()
     browser.execute_script("arguments[0].click();", WebDriverWait(browser, 20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="youbora__filters_wizard"]/div[3]/div[3]/button'))))
-    
-    ############################################################
     time.sleep(3)
     browser.find_element(By.XPATH,'/html/body/div[2]/div[3]/div[3]/div[1]/div[2]/div/div/div/div[1]/p/div/div/input').send_keys("Title")
     browser.find_element(By.XPATH,'/html/body/div[2]/div[3]/div[3]/div[1]/div[2]/div/div/div/div[1]/p/div/div/input').send_keys(Keys.ENTER)
-    browser.find_element(By.XPATH,'//*[@id="youbora__filters_wizard"]/div[3]/div[3]/div[2]/div[1]/div/div/input').send_keys(CANAL)
+    browser.find_element(By.XPATH,'//*[@id="youbora__filters_wizard"]/div[3]/div[3]/div[2]/div[1]/div/input').send_keys(CANAL)
     time.sleep(3)  
 
     browser.find_element(By.XPATH,'//*[@id="youbora__filters_wizard"]/div[3]/div[3]/div[2]/div[2]/div/table/tbody/div/tr/td[1]/div/span/span[1]/input').click()
-    #driver.execute_script("arguments[0].click();", WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="youbora__filters_wizard"]/div[3]/div[3]/div[2]/div[2]/div/table/tbody/div/tr/td[1]/div/span/span[1]/input'))))
-                                                                                                                         
+                                                                                                              
     time.sleep(3)
     browser.find_element(By.XPATH,'/html/body/div[2]/div[3]/div[3]/div[1]/div[1]/div/div/div/div[1]/p/div/div/input').send_keys("Include")
     browser.find_element(By.XPATH,'/html/body/div[2]/div[3]/div[3]/div[1]/div[1]/div/div/div/div[1]/p/div/div/input').send_keys(Keys.ENTER)
-          #browser.find_element(By.XPATH,'//*[@id="youbora__filters_wizard"]/div[3]/div[3]/button').click()
- 
-    #APPLY
+
+    time.sleep(3)
+
     browser.execute_script("arguments[0].click();", WebDriverWait(browser, 20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="youbora__filters_wizard"]/div[3]/div[3]/button'))))
     browser.execute_script("arguments[0].click();", WebDriverWait(browser, 20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="youbora__filters_wizard"]/div[3]/div[5]/div/button[2]'))))
     time.sleep(3)
 
-    suscribers = browser.find_element(By.XPATH,'//*[@id="fc446df0-cd91-4ba1-a33e-1bff36d845bd"]/div/div[2]/div/div[1]/div/p')
-    hours = browser.find_element(By.XPATH,'//*[@id="52194ecc-0755-44a7-b329-3e2775623aa4"]/div/div[2]/div/div[1]/div/p')
-  
+    suscribers = browser.find_element(By.XPATH,'//*[@id="fc446df0-cd91-4ba1-a33e-1bff36d845bd"]/div/div[2]/div/div[1]/p')
+    hours = browser.find_element(By.XPATH,'//*[@id="52194ecc-0755-44a7-b329-3e2775623aa4"]/div/div[2]/div/div[1]/p')
+
     total = { 'canal': CANAL+' '+FECHA,'suscribers':suscribers.text,'hours': hours.text }
  
 
     browser.execute_script("arguments[0].click();", WebDriverWait(browser, 20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="youbora__container"]/main/div[1]/button'))))
     browser.execute_script("arguments[0].click();", WebDriverWait(browser, 20).until(EC.element_to_be_clickable((By.XPATH, '/html/body/div[2]/div[3]/div/div[3]/button[2]'))))
     return total
+
 def vod():
     pass
 
 def franja():
     pass
 
-def live():
-    browser = _login()
-    print(browser)
+def live(browser):
     deportes =  pd.read_csv('DEPORTES.csv')
     deportes = deportes[['canal','fecha']]
     print(deportes)
@@ -173,9 +157,14 @@ def live():
     for index,row in deportes.iterrows():
         print(row['canal'])
         print(row['fecha'])
-        x ={'canal':row['canal'],'fecha':row['fecha']}    
+        x ={'canal':row['canal'],'fecha':row['fecha']}
+
+    
         week_after = datetime.strptime(x['fecha'], '%Y-%m-%d %H:%M:%S') -  timedelta(days=7)
+      
+
         x_before = {'canal': x['canal'],'fecha':str(week_after)}
+
         total=semanal_deportes(x,browser)
         total_before=semanal_deportes(x_before,browser)
         KPI.append(total)
@@ -184,10 +173,17 @@ def live():
     print(KPI)
     df = pd.DataFrame(data=KPI)
     print(df)
+    df['suscribers']=df['suscribers'].apply(convertir_suscribers)
+    df['hours']=df['hours'].apply(convertir_hours)
     df2 = pd.DataFrame(data=KPI_antes)
     print(df2)
+    df2['suscribers']=df2['suscribers'].apply(convertir_suscribers)
+    df2['hours']=df2['hours'].apply(convertir_hours)
+
     df.to_excel("resultados_partidos1.xlsx",index=False)
     df2.to_excel("resultados_partidos2.xlsx",index=False)
+
+    #return 1
 
 
 def inc(x):
@@ -202,13 +198,32 @@ def index():
 
 @app.route("/test" , methods=['GET', 'POST'])
 def test():
+
     select = request.form.get('comp_select')
-    if select == 'LIVE':
-        live()
-    elif select == 'FRANJA':
-        franja()
-    else:
-        vod()
+    options = webdriver.ChromeOptions()
+    # #options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+    options.add_argument('--ignore-certificate-errors')
+    options.add_argument('--incognito')
+    options.add_argument('--headless')
+
+    driver = webdriver.Chrome(executable_path="./chromedriver")
+
+ 
+    # #options.add_argument('--disable-dev-shm-usage')
+    # #options.add_argument('--no-sandbox')
+    # #browser = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"),chrome_options=options)
+
+
+
+    driver.get("https://youbora.nicepeopleatwork.com/")
+    _login(driver, 'PeruOps', 'P3ru0ps')
+
+    # if select == 'LIVE':
+    #     live()
+    # elif select == 'FRANJA':
+    #     franja()
+    # else:
+    #     vod()
     return(str(select)) # just to see what select is
 
 @app.route('/', methods=['POST'])
