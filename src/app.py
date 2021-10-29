@@ -21,7 +21,7 @@ def inc(x):
 def _login(browser, email, password):
 
     browser.get("https://suite.npaw.com/login")
-    browser.maximize_window()
+    #browser.maximize_window()
   
     u = browser.find_element_by_xpath('//*[@id="youbora__container"]/div[1]/form/div[1]/div/input').send_keys("PeruOps")
     p=  browser.find_element_by_xpath('//*[@id="youbora__container"]/div[1]/form/div[2]/div/input').send_keys("P3ru0ps")
@@ -45,14 +45,13 @@ def index():
     options.add_argument('--headless')
     options.add_argument('--disable-dev-shm-usage')
     options.add_argument('--no-sandbox')
-    browser = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"),chrome_options=options)
+    driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"),chrome_options=options)
     #browser = webdriver.Chrome(executable_path="./chromedriver")
-    browser.get("https://suite.npaw.com/login")
-    #print(browser.page_source)
-    #browser.maximize_window()
-    #driver.get("https://youbora.nicepeopleatwork.com/")
-   
-    browser = _login(browser, 'PeruOps', 'P3ru0ps')
+
+    driver = webdriver.Chrome(executable_path="./chromedriver")
+
+    driver.get("https://youbora.nicepeopleatwork.com/")   
+    browser = _login(driver, 'PeruOps', 'P3ru0ps')
 
     return render_template(
         'form.html')
