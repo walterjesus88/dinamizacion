@@ -18,6 +18,25 @@ app = Flask(__name__,template_folder='../template')
 def inc(x):
     return x + 1
 
+def _login(browser, email, password):
+
+    browser.get("https://suite.npaw.com/login")
+    browser.maximize_window()
+  
+    u = browser.find_element_by_xpath('//*[@id="youbora__container"]/div[1]/form/div[1]/div/input').send_keys("PeruOps")
+    p=  browser.find_element_by_xpath('//*[@id="youbora__container"]/div[1]/form/div[2]/div/input').send_keys("P3ru0ps")
+
+
+    browser.execute_script("arguments[0].click();", WebDriverWait(browser, 20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="youbora__login_submit"]'))))
+
+    browser.get("https://youbora.nicepeopleatwork.com/analytics/MainKPIsPeru/Phantasia-DINA")
+
+
+    browser.execute_script("arguments[0].click();", WebDriverWait(browser, 20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="youbora__container"]/main/div[1]/button'))))
+    browser.execute_script("arguments[0].click();", WebDriverWait(browser, 20).until(EC.element_to_be_clickable((By.XPATH, '/html/body/div[2]/div[3]/div/div[3]/button[2]'))))
+
+    return browser
+
 @app.route('/')
 def index(): 
     options = webdriver.ChromeOptions()
@@ -31,21 +50,9 @@ def index():
     browser.get("https://suite.npaw.com/login")
     #print(browser.page_source)
     #browser.maximize_window()
+    #driver.get("https://youbora.nicepeopleatwork.com/")
    
-  
-    u = browser.find_element_by_xpath('//*[@id="youbora__container"]/div[1]/form/div[1]/div/input').send_keys("PeruOps")
-    p=  browser.find_element_by_xpath('//*[@id="youbora__container"]/div[1]/form/div[2]/div/input').send_keys("P3ru0ps")
-
-
-    browser.execute_script("arguments[0].click();", WebDriverWait(browser, 20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="youbora__login_submit"]'))))
-
-
-   
-    browser = browser.get("https://youbora.nicepeopleatwork.com/analytics/MainKPIsPeru/Phantasia-DINA")
-
-
-    browser.execute_script("arguments[0].click();", WebDriverWait(browser, 20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="youbora__container"]/main/div[1]/button'))))
-    browser.execute_script("arguments[0].click();", WebDriverWait(browser, 20).until(EC.element_to_be_clickable((By.XPATH, '/html/body/div[2]/div[3]/div/div[3]/button[2]'))))
+    browser = _login(browser, 'PeruOps', 'P3ru0ps')
 
     return render_template(
         'form.html')
