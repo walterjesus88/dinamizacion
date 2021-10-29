@@ -65,7 +65,7 @@ def index():
     actions.perform()
     time.sleep(2)
 
-    driver.find_element_by_xpath('//*[@id="sidebar-pinner"]').click()
+    driver.find_element_by_xpath('/html/body/div/aside/a/div[2]/button').click() 
 
 
     # time.sleep(5)
