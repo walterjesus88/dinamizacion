@@ -31,17 +31,16 @@ def index():
     browser.get("https://suite.npaw.com/login")
     #print(browser.page_source)
     #browser.maximize_window()
-    time.sleep(5)
+   
   
     u = browser.find_element_by_xpath('//*[@id="youbora__container"]/div[1]/form/div[1]/div/input').send_keys("PeruOps")
     p=  browser.find_element_by_xpath('//*[@id="youbora__container"]/div[1]/form/div[2]/div/input').send_keys("P3ru0ps")
 
-    print(browser)
 
     browser.execute_script("arguments[0].click();", WebDriverWait(browser, 20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="youbora__login_submit"]'))))
 
 
-    time.sleep(5)
+   
     browser.get("https://youbora.nicepeopleatwork.com/analytics/MainKPIsPeru/Phantasia-DINA")
 
 
