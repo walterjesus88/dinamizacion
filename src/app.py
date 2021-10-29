@@ -60,7 +60,8 @@ def index():
 
     #element_to_hover_over = driver.find_element_by_id("sidebar").click()
 
-    #
+    time.sleep(5)
+    
     driver.find_element_by_xpath('//*[@id="sidebar"]').click()
     driver.find_element_by_xpath('//*[@id="sidebar-pinner"]').click() 
     #hover = ActionChains(driver).move_to_element(element_to_hover_over)
