@@ -61,7 +61,7 @@ def index():
     #element_to_hover_over = driver.find_element_by_id("sidebar")
     #
     element_to_hover_over = driver.find_element_by_id("youbora__container").click()
-    driver.find_element_by_xpath('/html/body/div/aside').click()
+    driver.find_element_by_xpath('/html/body/div/aside')
     driver.find_element_by_xpath('/html/body/div/aside/a/div[2]/button').click() 
     #hover = ActionChains(driver).move_to_element(element_to_hover_over)
     #hover.perform()
