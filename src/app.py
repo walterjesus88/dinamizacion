@@ -42,7 +42,7 @@ def index():
     options = webdriver.ChromeOptions()
     #options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
 
-    options.add_argument('--headless')
+    #options.add_argument('--headless')
     options.add_argument('--disable-dev-shm-usage')
     options.add_argument('--no-sandbox')
     #driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"),chrome_options=options)
@@ -58,12 +58,12 @@ def index():
     time.sleep(5)
     driver.find_element_by_xpath('//*[@id="youbora__home__app__analytics"]').click()
 
-    #element_to_hover_over = driver.find_element_by_id("sidebar").click()
 
     time.sleep(5)
+    driver.find_element_by_id("sidebar").click()
     
-    driver.find_element_by_xpath('//*[@id="sidebar"]').click()
-    driver.find_element_by_xpath('//*[@id="sidebar-pinner"]').click() 
+    #driver.find_element_by_xpath('/html/body/div/aside').click()
+    #driver.find_element_by_xpath('//*[@id="sidebar-pinner"]').click() 
     #hover = ActionChains(driver).move_to_element(element_to_hover_over)
     #hover.perform()
 
