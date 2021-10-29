@@ -55,7 +55,7 @@ def index():
     driver.find_element_by_xpath('//*[@id="youbora__container"]/div[1]/form/div[1]/div/input').send_keys("PeruOps")
     driver.find_element_by_xpath('//*[@id="youbora__container"]/div[1]/form/div[2]/div/input').send_keys("P3ru0ps")
     driver.find_element_by_xpath('//*[@id="youbora__login_submit"]').click()
-    time.sleep(5)
+    #time.sleep(5)
     driver.find_element_by_xpath('//*[@id="youbora__home__app__analytics"]').click()
 
     element_to_hover_over = driver.find_element_by_id("sidebar")
