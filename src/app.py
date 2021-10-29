@@ -58,11 +58,11 @@ def index():
     time.sleep(5)
     driver.find_element_by_xpath('//*[@id="youbora__home__app__analytics"]').click()
 
-    #element_to_hover_over = driver.find_element_by_id("sidebar").click()
-
+    #element_to_hover_over = driver.find_element_by_id("sidebar")
     #
+    element_to_hover_over = driver.find_element_by_id("youbora__container").click()
     driver.find_element_by_xpath('/html/body/div/aside').click()
-    driver.find_element_by_xpath('//*[@id="sidebar-pinner"]').click()
+    driver.find_element_by_xpath('/html/body/div/aside/a/div[2]/button').click() 
     #hover = ActionChains(driver).move_to_element(element_to_hover_over)
     #hover.perform()
 
@@ -71,7 +71,6 @@ def index():
     driver.find_element_by_xpath('//*[@id="sidebar"]/div[2]/div[1]/div/div/input').send_keys("Phantasia")
     driver.find_element_by_xpath('//*[@id="sidebar"]/div[1]/div/div[1]/div/div/div[3]/div').click()
     driver.find_element_by_xpath('//*[@id="sidebar"]/div[1]/div/div[1]/div/div/div[7]/div/a/div').click()
-    element_to_hover_over = driver.find_element_by_id("youbora__container").click()
 
     #hover = ActionChains(driver).move_to_element(element_to_hover_over)
     #hover.perform()
