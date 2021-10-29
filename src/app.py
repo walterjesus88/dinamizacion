@@ -50,13 +50,14 @@ def index():
 
 
 
-    driver.get("https://suite.npaw.com/login")   
+    driver.get("https://suite.npaw.com/MainKPIsPeru/Phantasia-DINA")   
+    time.sleep(5)
   
     driver.find_element_by_xpath('//*[@id="youbora__container"]/div[1]/form/div[1]/div/input').send_keys("PeruOps")
     driver.find_element_by_xpath('//*[@id="youbora__container"]/div[1]/form/div[2]/div/input').send_keys("P3ru0ps")
     driver.find_element_by_xpath('//*[@id="youbora__login_submit"]').click()
     time.sleep(5)
-    # driver.find_element_by_xpath('//*[@id="youbora__home__app__analytics"]').click()
+    driver.find_element_by_xpath('//*[@id="youbora__home__app__analytics"]').click()
 
 
     # time.sleep(5)
@@ -75,8 +76,8 @@ def index():
     # hover = ActionChains(driver).move_to_element(element_to_hover_over)
     # hover.perform()
 
-
-    driver.get("https://suite.npaw.com/analytics/MainKPIsPeru/Phantasia-DINA")
+    #driver.Navigate().GoToUrl("http://example.com");
+    b = driver.get("https://suite.npaw.com/analytics/MainKPIsPeru/Phantasia-DINA")
     time.sleep(5)
 
     driver.find_element_by_xpath('//*[@id="youbora__container"]/main/div[1]/button').click()
