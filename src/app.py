@@ -60,6 +60,14 @@ def index():
     driver.find_element_by_xpath('//*[@id="youbora__home__app__analytics"]').click()
 
 
+    actions = ActionChains(driver) 
+    actions.send_keys(Keys.TAB * 2)
+    actions.perform()
+    time.sleep(2)
+
+    driver.find_element_by_xpath('//*[@id="sidebar-pinner"]').click()
+
+
     # time.sleep(5)
     # element_to_hover_over = driver.find_element_by_id("sidebar")
 
@@ -68,17 +76,17 @@ def index():
 
 
 
-    # driver.find_element_by_xpath('//*[@id="sidebar"]/div[2]/div[1]/div/div/input').send_keys("Phantasia")
-    # driver.find_element_by_xpath('//*[@id="sidebar"]/div[1]/div/div[1]/div/div/div[3]/div').click()
-    # driver.find_element_by_xpath('//*[@id="sidebar"]/div[1]/div/div[1]/div/div/div[7]/div/a/div').click()
-    # element_to_hover_over = driver.find_element_by_id("youbora__container")#click()
+    driver.find_element_by_xpath('//*[@id="sidebar"]/div[2]/div[1]/div/div/input').send_keys("Phantasia")
+    driver.find_element_by_xpath('//*[@id="sidebar"]/div[1]/div/div[1]/div/div/div[3]/div').click()
+    driver.find_element_by_xpath('//*[@id="sidebar"]/div[1]/div/div[1]/div/div/div[7]/div/a/div').click()
+    element_to_hover_over = driver.find_element_by_id("youbora__container").click()
 
     # hover = ActionChains(driver).move_to_element(element_to_hover_over)
     # hover.perform()
 
     #driver.Navigate().GoToUrl("http://example.com");
-    b = driver.get("https://suite.npaw.com/analytics/MainKPIsPeru/Phantasia-DINA")
-    time.sleep(5)
+    #b = driver.get("https://suite.npaw.com/analytics/MainKPIsPeru/Phantasia-DINA")
+    time.sleep(3)
 
     driver.find_element_by_xpath('//*[@id="youbora__container"]/main/div[1]/button').click()
     driver.find_element_by_xpath('/html/body/div[2]/div[3]/div/div[3]/button[2]').click()
